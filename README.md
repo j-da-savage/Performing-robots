@@ -14,3 +14,79 @@ What we used:
 -
 -
 -
+
+
+
+
+
+
+
+###  *09/20 - dance_code_test1*
+
+        void setup() {
+          // Pins 2 and 3 are connected to In1 and In2 respectively
+          // of the L298 motor driver
+          pinMode(2, OUTPUT);
+          pinMode(3, OUTPUT);
+          pinMode(4, OUTPUT);
+          pinMode(5, OUTPUT);
+        }
+        
+        void loop() {
+        
+         //half turn in one direction
+          digitalWrite(2, HIGH);
+          digitalWrite(3, LOW);
+          digitalWrite(4, LOW);
+          digitalWrite(5, LOW);
+          delay(1000); 
+          stop(); 
+          
+         //half turn in the other direction
+          digitalWrite(2, LOW);
+          digitalWrite(3, LOW);
+          digitalWrite(4, HIGH);
+          digitalWrite(5, LOW);
+          delay(1000); 
+          stop();
+          
+         //full turn
+         digitalWrite(2, LOW);
+         digitalWrite(3, HIGH);
+         digitalWrite(4, HIGH);
+         digitalWrite(5, LOW);
+         delay(2000); 
+         stop();
+        
+        
+         //front
+         digitalWrite(2, LOW);
+         digitalWrite(3, HIGH);
+         digitalWrite(4, LOW);
+         digitalWrite(5, HIGH);
+         delay(2000); 
+         stop();
+        
+         //back
+         digitalWrite(2, HIGH);
+         digitalWrite(3, LOW);
+         digitalWrite(4, HIGH);
+         digitalWrite(5, LOW);
+         delay(2000); 
+         stop();
+         
+        
+        }
+        
+        void stop(){
+          digitalWrite(2, LOW);
+          digitalWrite(3, LOW);
+          digitalWrite(4, LOW);
+          digitalWrite(5, LOW);
+          delay(500);
+        }
+
+Results:
+
+
+
