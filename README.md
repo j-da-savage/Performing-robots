@@ -7,3 +7,10 @@
 meet عنتر (Aantar)!
 
 ![ANTAR](https://github.com/j-da-savage/Performing-robots/blob/main/sketch1.jpg)
+
+###  *09/13-09/18 - building the robot base*
+
+What we used:
+-
+-
+-
