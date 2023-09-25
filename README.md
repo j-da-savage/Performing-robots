@@ -85,7 +85,7 @@ What we used:
           digitalWrite(5, LOW);
           delay(500);
         }
-###  *09/25 - dance_story*
+###  *09/25 - Robot story*
 
 [Results](https://youtube.com/shorts/l13Hn9hQDg0?feature=share) (kindly ignore the little accident :) )
 [Background Music](https://youtu.be/lRXLAeogv5U?si=yIH5ja6Ax0gdW9EB)
