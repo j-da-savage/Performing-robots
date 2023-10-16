@@ -370,3 +370,13 @@ What we used:
           analogWrite(6, 0);
           analogWrite(10, 0);
         }
+
+
+###  *16/10 - Robot play suggestion*
+
+
+The play follows 7 robots, all coded with fairly ‘simple’ algorithms. 
+
+The limited knowledge and simplicity of the robots (yes, no, maybe) leads to a series of misunderstandings that have the robots end up in situations they did not expect.
+
+The robots however, learn from each other and start to gain knowledge of the world around them, but with some casualties along, leading the spectator to think of the consequences and responsibility of the creators of the robots.
