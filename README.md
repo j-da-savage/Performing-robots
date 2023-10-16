@@ -375,7 +375,7 @@ What we used:
 ###  *16/10 - Robot play suggestion*
 
 
-The play follows 7 robots, all coded with fairly ‘simple’ algorithms. 
+The play follows 7 robots, all coded with fairly ‘simple’ algorithms, made for very specific tasks. 
 
 The limited knowledge and simplicity of the robots (yes, no, maybe) leads to a series of misunderstandings that have the robots end up in situations they did not expect.
 
