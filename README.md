@@ -1,8 +1,6 @@
 # Performing Robots
 
 # ROBOT #1 - my first robot
-### Built with Fatema
-
 ###  *09/12/2023 - robot sketch*
 meet عنتر (Aantar)!
 
@@ -380,3 +378,93 @@ The play follows 7 robots, all coded with fairly ‘simple’ algorithms, made f
 The limited knowledge and simplicity of the robots (yes, no, maybe) leads to a series of misunderstandings that have the robots end up in situations they did not expect.
 
 The robots however, learn from each other and start to gain knowledge of the world around them, but with some casualties along, leading the spectator to think of the consequences and responsibility of the creators of the robots.
+
+###  *13/11 - Servo motors code*
+
+        #include <Servo.h>
+        
+        Servo myservo; 
+        Servo myservo2;
+        Servo myservo3;
+        
+        int pos = 70;    // variable to store the servo position
+        int pos2 = 70;    // variable to store the servo2 position
+        int pos3 = 70;    // variable to store the servo3 position
+        
+        
+        void setup() {
+         Serial.begin(9600);
+          myservo.attach(9);
+          myservo2.attach(10);
+          myservo3.attach(11);
+        
+        
+        }
+        
+        void loop() {
+          int pos2 = 85;
+          int pos3 = 55;
+          for (pos = 55; pos <= 85; pos +=1) { 
+            myservo.write(pos);
+            myservo2.write(pos2);
+             myservo3.write(pos3);
+        
+            delay(20); 
+            pos2-=1;
+            pos3+=1;
+        //    Serial.println(pos);
+        
+        //    pos2 = pos2 += 1;
+        //    myservo2.write(pos2);
+        
+          
+          }
+        //  
+        //  pos2 = 55;
+        //  for (pos = 85; pos >= 55; pos -=1){
+        //    myservo.write(pos);
+        //    myservo2.write(pos2);
+        //    delay(15); 
+        //    pos2+=1;
+        //    delay(15);
+        ////    Serial.println(pos);
+        //
+        //  }
+        
+        
+        //  for (pos2 = 55; pos2 <= 85; pos2 +=1) { 
+        //    myservo2.write(pos2);
+        //    delay(15); 
+        //    Serial.println(pos2);
+        //
+        //  }
+        //
+        //  for (pos2 = 85; pos2 >= 55; pos2 -=1){
+        //    myservo2.write(pos2);
+        //    delay(15);
+        //    Serial.println(pos2);
+        //
+        //  }
+          
+        //
+        //  for (pos3 = 80; po32 >= 60; pos3 -=1){
+        //    myservo3.write(pos3);
+        //    delay(20);
+        //    Serial.println(pos3);
+        //
+        //  }
+        //
+        //  for (pos3 = 60; pos3 <= 80; pos3 +=1) { 
+        //    myservo3.write(pos3);
+        //    delay(20); 
+        //    Serial.println(pos3);
+        //
+        //  }
+                        
+        }
+        
+        
+        //60 right
+        // 80 left
+
+
