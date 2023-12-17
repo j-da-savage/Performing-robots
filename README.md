@@ -1,25 +1,38 @@
+# Performing Robots Journal
+
 # Performing Robots
 
-# ROBOT #1 - my first robot
-###  *09/12/2023 - robot sketch*
-meet عنتر (Aantar)!
+###  *Robot sketch*
+meet FIFI !
 
-![ANTAR](https://github.com/j-da-savage/Performing-robots/blob/main/sketch1.jpg)
-
-###  *09/13-09/18 - building the robot base*
+![Fifi](https://github.com/j-da-savage/Performing-robots/blob/main/sketch1.jpg)
+![Fifi design](https://github.com/j-da-savage/Performing-robots/blob/main/Pictures/designFifi.jpeg)
+![Fifi Structure](https://github.com/j-da-savage/Performing-robots/blob/main/Pictures/fifiStructure.jpg)
+###  *Building the robot base*
 
 What we used:
--
--
--
+- Wood
+- 2 Motors
+- Arduino Uno
+- H-bridge
+- Battery
+- 2 Wheels
+- 2 Caster Wheels
 
+![Robot Base](https://github.com/j-da-savage/Performing-robots/blob/main/Pictures/base1.jpg)
+![Building robot base](https://github.com/j-da-savage/Performing-robots/blob/main/Pictures/creatingBase.JPG)
 
+###  *Connecting the H-bridge and the Arduino*
 
+![H-bridge/Arduino connections](https://github.com/j-da-savage/Performing-robots/blob/main/Pictures/Hbridge.jpg)
 
+#### Issues: 
+Upon testing the H-bridge with the Arduino, we were faced with the issue of the H-bridge overheating and not working, so we had to replace it. Then, we were able to test the servo motor we would be using with the H-bridge connected to it.
 
-
+![H-bridge and Servo Motor](https://github.com/j-da-savage/Performing-robots/blob/main/Pictures/HbridgeServo.png)
 
 ###  *09/20 - dance_code_test1*
+In order to test out the movements for the robot, using the base we had created, we wrote the following code to do a little robotic-dance:
 
         void setup() {
           // Pins 2 and 3 are connected to In1 and In2 respectively
@@ -83,152 +96,18 @@ What we used:
           digitalWrite(5, LOW);
           delay(500);
         }
-###  *09/25 - Robot story*
+![Figuring out angles and the motor](https://github.com/j-da-savage/Performing-robots/blob/main/Pictures/movements.jpg)
+[Demonstration video](https://drive.google.com/file/d/1vEYi1s2UCRhs5zjfDxcMFtIEram1NQ80/view?usp=drive_link)
 
-[Results](https://youtube.com/shorts/l13Hn9hQDg0?feature=share) (kindly ignore the little accident :) )
-[Background Music](https://youtu.be/lRXLAeogv5U?si=yIH5ja6Ax0gdW9EB)
-
-
-###  *10/01 - RC Hobby Controller*
-      
-        #include <EnableInterrupt.h>
-        
-        #define SERIAL_PORT_SPEED 9600
-        #define RC_NUM_CHANNELS  4
-        
-        #define RC_CH1  0
-        #define RC_CH2  1
-        #define RC_CH3  2
-        #define RC_CH4  3
-        
-        #define RC_CH1_PIN  12
-        #define RC_CH2_PIN  9
-        #define RC_CH3_PIN  8
-        #define RC_CH4_PIN  7
-        
-        uint16_t rc_values[RC_NUM_CHANNELS];
-        uint32_t rc_start[RC_NUM_CHANNELS];
-        volatile uint16_t rc_shared[RC_NUM_CHANNELS];
-        
-        void rc_read_values() {
-          noInterrupts();
-          memcpy(rc_values, (const void *)rc_shared, sizeof(rc_shared));
-          interrupts();
-        }
-        
-        void calc_input(uint8_t channel, uint8_t input_pin) {
-          if (digitalRead(input_pin) == HIGH) {
-            rc_start[channel] = micros();
-          } else {
-            uint16_t rc_compare = (uint16_t)(micros() - rc_start[channel]);
-            rc_shared[channel] = rc_compare;
-          }
-        }
-        
-        void calc_ch1() {
-          calc_input(RC_CH1, RC_CH1_PIN);
-        }
-        void calc_ch2() {
-          calc_input(RC_CH2, RC_CH2_PIN);
-        }
-        void calc_ch3() {
-          calc_input(RC_CH3, RC_CH3_PIN);
-        }
-        void calc_ch4() {
-          calc_input(RC_CH4, RC_CH4_PIN);
-        }
-        
-        void setup() {
-          Serial.begin(SERIAL_PORT_SPEED);
-        
-          pinMode(RC_CH1_PIN, INPUT); //side wheel
-          pinMode(RC_CH2_PIN, INPUT); //trigger
-          pinMode(RC_CH3_PIN, INPUT); // side knob
-          pinMode(RC_CH4_PIN, INPUT); //bottom button
-        
-          enableInterrupt(RC_CH1_PIN, calc_ch1, CHANGE);
-          enableInterrupt(RC_CH2_PIN, calc_ch2, CHANGE);
-          enableInterrupt(RC_CH3_PIN, calc_ch3, CHANGE);
-          enableInterrupt(RC_CH4_PIN, calc_ch4, CHANGE);
-        
-          pinMode(3, OUTPUT);
-          pinMode(5, OUTPUT);
-          pinMode(6, OUTPUT);
-          pinMode(10, OUTPUT);
-        }
-        
-        void loop() {
-          rc_read_values();
-        
-          Serial.print("CH1:"); Serial.print(rc_values[RC_CH1]); Serial.print("\t");
-          Serial.print("CH2:"); Serial.print(rc_values[RC_CH2]); Serial.print("\t");
-          Serial.print("CH3:"); Serial.print(rc_values[RC_CH3]); Serial.print("\t");
-          Serial.print("CH4:"); Serial.println(rc_values[RC_CH4]);
-        
-          delay(200);
-        
-        // robot moving forward and in reverse using Hobby RC controller
-          if (rc_values[RC_CH2] > 1570) forward();
-          if (rc_values[RC_CH2] < 1530) reverse();
-          if ((rc_values[RC_CH2] < 1570) && (rc_values[RC_CH2] > 1530)) stop();
-        
-        // robot moving right and left using Hobby RC controller
-        
-          if (rc_values[RC_CH1] > 1510) right();
-          if (rc_values[RC_CH1] < 1495) left ();
-        
-          
-          
-        }
-        
-        void forward() {
-        
-         digitalWrite(3, LOW);
-         digitalWrite(5, HIGH);
-         digitalWrite(6, LOW);
-         digitalWrite(10, HIGH);
-          
-        }
-        
-        void reverse() {
-        
-         digitalWrite(3, HIGH);
-         digitalWrite(5, LOW);
-         digitalWrite(6, HIGH);
-         digitalWrite(10, LOW);
-          
-        }
-        
-        void right() {
-        
-         digitalWrite(3, LOW);
-         digitalWrite(5, HIGH);
-         digitalWrite(6, LOW);
-         digitalWrite(10, LOW);
-          
-        }
-        
-        void left() {
-        
-         digitalWrite(3, LOW);
-         digitalWrite(5, LOW);
-         digitalWrite(6, LOW);
-         digitalWrite(10, HIGH);
-          
-        }
-        
-        
-        void stop(){
-          digitalWrite(3, LOW);
-          digitalWrite(5, LOW);
-          digitalWrite(6, LOW);
-          digitalWrite(10, LOW);
-        }
-
-[results](https://youtube.com/shorts/sorYxpKn_Ek?feature=share)
+#### Issues: 
+- Controlling the exact movements
+- Controlling speed
 
 
-###  *10/09 - RC Hobby Controller with speed*
+
+###  * Hobby RC Controller *
+In order to control our robot remotely, we used a Hobby RC shield on the arduino, connected to a remote control, which would give us the freedom to control the robot on demand and however we want. We initially used a code for the radio that moved at a uniform speed, but we then added the code to control the speed of robot:
+
 
         #include <EnableInterrupt.h>
         
@@ -368,10 +247,10 @@ What we used:
           analogWrite(6, 0);
           analogWrite(10, 0);
         }
+[Demonstration ](https://drive.google.com/file/d/1i_314TlIeaqN-DG2CyszPHdHuCzQ7c6g/view?usp=drive_link)
 
 
 ###  *16/10 - Robot play suggestion*
-
 
 The play follows 7 robots, all coded with fairly ‘simple’ algorithms, made for very specific tasks. 
 
@@ -379,7 +258,10 @@ The limited knowledge and simplicity of the robots (yes, no, maybe) leads to a s
 
 The robots however, learn from each other and start to gain knowledge of the world around them, but with some casualties along, leading the spectator to think of the consequences and responsibility of the creators of the robots.
 
-###  *13/11 - Servo motors code*
+###  * Servo motors *
+In order to built our structure for the dancing cactus robot, we needed three stacked rods connected with servo motors to move in different directions in a pendulum-like manner. So, we embarked on a very long and obstacle-filled process of 1) controlling the servo motors and getting them to move how we want them to, and 2) connecting the servo motors to the rods and stabilizing the entire structure.
+
+For the servo motor code, one of the biggest challenged was figuring out the correct angles to get every motor to move the way we want it, back and forth with certain degrees of freedom. This was a process of trial and error, we observed the behavior of the servo motors and utilized it in the code. Sometimes, the angles of the motors would change even-though they were previously calibrated. But, at the end, we were able to figure out a good balance and ended up with the following code as the dancing movements for the robot:
 
         #include <Servo.h>
         
@@ -467,8 +349,25 @@ The robots however, learn from each other and start to gain knowledge of the wor
         //60 right
         // 80 left
 
+[Figuring out angles](https://drive.google.com/file/d/1raeyuQioLlZDRXU-9tEQKuLOxFMqyUo7/view?usp=drive_link)
 
-###  *Music Maker Shield*
+[Servo testing](https://drive.google.com/file/d/1m_sVQ6p1YzEFK00D26gkBFE_X5NLKGez/view?usp=drive_link)
+
+[Servo Testing with rod](https://drive.google.com/file/d/10tUkqMrKdUnyErQY8bLYIFvY35p8nDz5/view?usp=drive_link)
+
+After figuring out the code and the angles, we then constructed our rods and connected them to the base, this was also a very challenging and time-consuming process as we used aluminum in order to make the robot lighter, but this proved to be challenging due to the stiffness of the material, which made it hard to drill into and cut. 
+
+The other main difficulty was stabilizing the servo motors, notable the bottom one attached to the base, with the rods and the base. Because of the weight of the structure and the torque of the motor, the hub of the servo motor would keep getting loose upon movement. After trying out various solutions, we ended up welding the shaft to the hub in order to reduce movement and increase stability. We later added wooden stabilizers to the base in order to keep the robot from falling. 
+
+![Hub](https://github.com/j-da-savage/Performing-robots/blob/main/Pictures/Hub.jpg)
+![Welding](https://github.com/j-da-savage/Performing-robots/blob/main/Pictures/Welding.jpg)
+![Structure](https://github.com/j-da-savage/Performing-robots/blob/main/Pictures/IMG_3296.JPG)
+
+
+
+###  *Music Maker Shield and NeoPixels*
+
+We then added Sound and Neopixels to our robot in order to animate it more. This process was relatively easy, we did face some issues in the final receiver code with the music, but were able to figure it out. This is the music maker shield code:
     
         // include SPI, MP3 and SD libraries
         #include <SPI.h>
@@ -597,7 +496,9 @@ The robots however, learn from each other and start to gain knowledge of the wor
         }
 
 
-###  *UPDATED RECEIVER CODE*
+###  *Receiver and Transmitter*
+
+#### Receiver Code
 
         /*
           m1->19
@@ -1236,7 +1137,7 @@ The robots however, learn from each other and start to gain knowledge of the wor
         }
 
 
-###  *UPDATED TRANSMITTER CODE*
+#### Transmitter Code
 
                 
                 /*
@@ -1527,3 +1428,10 @@ The robots however, learn from each other and start to gain knowledge of the wor
                 }
                 
                 // End of transmitter code
+
+
+### *Final product- FIFI the dancing cactus robot*
+
+![FIFI](https://github.com/j-da-savage/Performing-robots/blob/main/Pictures/fifiPIC.jpeg)
+
+[FIFI Dancing](https://drive.google.com/file/d/1GSkqdH5HsAr_0j0N-se8m-Fh96oVDB2w/view?usp=drive_link)
