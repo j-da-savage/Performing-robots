@@ -1,5 +1,9 @@
 # Performing Robots Journal
 
+# Poster
+
+![Fifi Poster](https://github.com/j-da-savage/Performing-robots/blob/main/fifi.png)
+
 # Performing Robots
 
 ###  *Robot sketch*
