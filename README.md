@@ -1,9 +1,5 @@
 # Performing Robots Journal
 
-# Poster
-
-![Fifi Poster](https://github.com/j-da-savage/Performing-robots/blob/main/fifi.png)
-
 # Performing Robots
 
 ###  *Robot sketch*
@@ -1435,6 +1431,10 @@ We then added Sound and Neopixels to our robot in order to animate it more. This
 
 
 ### *Final product- FIFI the dancing cactus robot*
+
+# Poster
+![Fifi Poster](https://github.com/j-da-savage/Performing-robots/blob/main/fifi.png)
+
 
 ![FIFI](https://github.com/j-da-savage/Performing-robots/blob/main/Pictures/fifiPIC.jpeg)
 
